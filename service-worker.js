@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/TouchDown.js/precache-manifest.6a4c9807d9d0f3d355e64641ff10a36a.js"
+  "/TouchDown.js/precache-manifest.2e312bc1a0eace1bf5dd041093e74236.js"
 );
 
 self.addEventListener('message', (event) => {
