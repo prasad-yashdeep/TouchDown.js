@@ -1,22 +1,14 @@
-import React, { Component, useEffect, useMemo, useRef, useState } from "react";
+import React, { Component, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Controls from "./Controls";
+import img1 from "./images/background.png";
 import bumperURL from "./images/marsbump1k.jpg";
 import marsURL from "./images/marsmap1k.jpg";
 import "./Model.css";
 import StartPage from "./Startpage";
+
 console.log(bumperURL);
-const SpaceShip = () => {
-  const [model, setModel] = useState();
-
-  useEffect(() => {
-    new GLTFLoader().load("/scene.gltf", setModel);
-  });
-
-  return model ? <primitive object={model.scene} /> : null;
-};
 
 class Model extends Component {
   constructor(props) {
@@ -29,8 +21,7 @@ class Model extends Component {
     this.enlarge = this.enlarge.bind(this);
   }
   componentDidMount() {
-    const data = new Array(1000).fill(0).map((d, id) => ({ id }));
-    this.setState({ data });
+    document.body.style.backgroundImage = `url(${img1})`;
   }
   enlarge(i, j, k) {
     const scaled = parseFloat(`${i}.${j}${k}`, 10);

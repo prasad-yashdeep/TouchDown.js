@@ -1,43 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { OrbitControls } from "drei";
+import React, { Component, Suspense, useEffect, useState } from "react";
 import { a, useTransition } from "react-spring";
-import { useLoader } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 import * as THREE from "three";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import "./endpage.css";
 
-function Space({ url }) {
-  const model = useLoader(GLTFLoader, url, (loader) => {
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco-gltf/");
-    loader.setDRACOLoader(dracoLoader);
+const SpaceShip = () => {
+  const [model, setModel] = useState();
+
+  useEffect(() => {
+    new GLTFLoader().load("/scene.gltf", setModel);
   });
-  return (
-    <group
-      rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, -7, 0]}
-      scale={[7, 7, 7]}
-    >
-      {model.map(({ geometry, material }) => {
-        // There are two buffergeometries in this gltf
-        // Save some GPU by rendering the rocks a little less vivd than the rocket
-        const rocks = geometry.index.count < 80000;
-        const Material = rocks ? "meshLambertMaterial" : "meshStandardMaterial";
-        return (
-          <mesh
-            key={geometry.uuid}
-            rotation={[Math.PI / 13.5, -Math.PI / 5.8, Math.PI / 5.6]}
-            geometry={geometry}
-            castShadow={!rocks}
-            receiveShadow={!rocks}
-          >
-            <Material attach="material" map={material.map} roughness={1} />
-          </mesh>
-        );
-      })}
-    </group>
-  );
-}
 
+  return model ? <primitive object={model.scene} /> : null;
+};
 function Loading() {
   const [finished, set] = useState(false);
   const [width, setWidth] = useState(0);
@@ -66,4 +43,61 @@ function Loading() {
   );
 }
 
-export default Space;
+class endpage extends Component {
+  state = {};
+  render() {
+    return (
+      <>
+        <div className="bg" />
+        <h1>
+          TheEnd
+          <br />
+          <span></span>
+        </h1>
+        <Canvas shadowMap camera={{ position: [0, 0, 15] }}>
+          <ambientLight intensity={0.75} />
+          <pointLight intensity={1} position={[-10, -25, -10]} />
+          <spotLight
+            castShadow
+            intensity={2.25}
+            angle={0.2}
+            penumbra={1}
+            position={[25, 25, 25]}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-bias={-0.0001}
+          />
+          <fog attach="fog" args={["#cc7b32", 16, 20]} />
+          <Suspense fallback={null}>
+            <SpaceShip />
+          </Suspense>
+          <OrbitControls
+            autoRotate
+            enablePan={false}
+            enableZoom={true}
+            enableDamping
+            dampingFactor={0.5}
+            rotateSpeed={1}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+        <div className="layer" />
+        <Loading />
+        <a
+          href="https://github.com/HackGod2000/TouchDown.js"
+          className="top-left"
+          children="Github"
+        />
+
+        <a
+          href="https://github.com/drcmda/react-three-fiber"
+          className="top-right"
+          children="+ react-three-fiber"
+        />
+      </>
+    );
+  }
+}
+
+export default endpage;

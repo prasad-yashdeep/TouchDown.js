@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-//import "./App.css";
+import Endpage from "./Components/endpage";
 import Model from "./Components/Model";
 import PathfindingVisualizer from "./Components/PathfindingVisualizer/PathfindingVisualizer";
+
 function App() {
   return (
     <Router>
@@ -13,6 +14,9 @@ function App() {
           </Route>
           <Route path="/algo">
             <PathfindingVisualizer />
+          </Route>
+          <Route path="/end">
+            <Endpage />
           </Route>
         </div>
       </Switch>

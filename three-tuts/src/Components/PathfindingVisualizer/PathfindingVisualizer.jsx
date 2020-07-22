@@ -13,6 +13,7 @@ import { IBestfs } from "../algorithms/IBestfs";
 import { IDAstar } from "../algorithms/IDAstar_new";
 import { jps, jpsans } from "../algorithms/jps";
 import { orthJPS, orthogonalans } from "../algorithms/orthJPS";
+import img1 from "../images/marsmap1k.jpg";
 import Node from "./Node";
 import "./PathfindingVisualizer.css";
 
@@ -73,6 +74,7 @@ export default class PathfindingVisualizer extends Component {
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({ grid });
+    document.body.style.backgroundImage = `url(${img1})`;
   }
 
   handleMouseDown(row, col) {

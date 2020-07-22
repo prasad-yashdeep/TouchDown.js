@@ -1,23 +1,16 @@
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  background-image: url(images/marsmap1k.jpg);
-  /*background: black;*/
-  /*overflow: hidden;*/
-  /*display: flex;*/
-  /*justify-content: center;*/
-  align-items: center;
-}
+html,
+body,
+#root,
 canvas {
   position: static;
+  align-content: center;
   top: 200;
-  left: 100;
   width: 100vw;
   height: 80vh;
+  display: flex;
 }
 .grid {
-  margin: 20px 0 0;
+  margin-left: 135px;
 }
 .button-wrapper {
   display: flex;
@@ -82,11 +75,6 @@ canvas {
   color: white;
   width: 120px;
   height: 60px;
-}
-
-.inibutt {
-  /* height: 110px; */
-  /* background-color: lightcoral; */
 }
 
 .startend {
