@@ -666,23 +666,8 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <p id="demo"></p>
-        Infinite Weighted Walls
-        <input
-          type="radio"
-          name="finite"
-          checked={!this.state.fin}
-          onChange={this.handleOptionChangeinfinite}
-        />
-        Finite Weighted Walls
-        <input
-          type="radio"
-          name="finite"
-          checked={this.state.fin}
-          onChange={this.handleOptionChangefinite}
-        />
         <div className="button-wrapper2">
-          <div className="button4">SELECT ALGORITHM</div>
+          <div className="button2">SELECT ALGORITHM</div>
           {/* <div class="testf"> */}
           <div class="buttf2" tabindex="1">
             <div class="buttf">
@@ -707,10 +692,12 @@ export default class PathfindingVisualizer extends Component {
                 <a>BFS Algorithm</a>
               </div>
               <div class="optf">
-                <li onClick={() => this.visualizeBFS()}>option1</li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeBFS()}>BFS</li>
+                <li onClick={() => this.visualizeBBFS()}>Bi-directional</li>
+                <li onClick={() => this.visualizeBFSwithdiagonals()}>
+                  Diagonal
+                </li>
+                <li onClick={() => this.visualizeBDBFS()}>BiDir+diagonal</li>
               </div>
             </div>
           </div>
@@ -720,12 +707,16 @@ export default class PathfindingVisualizer extends Component {
                 <a>Intelligent A-Star Algorithm</a>
               </div>
               <div class="optf">
-                <li onClick={() => this.visualizeIntelligentAstar()}>
-                  option1
+                <li onClick={() => this.visualizeIntelligentAstar()}>A-Star</li>
+                <li onClick={() => this.visualizeBiIntelligentAstar()}>
+                  Bi-Directional
                 </li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeIntelligentAstarDiag()}>
+                  Diagonal
+                </li>
+                <li onClick={() => this.visualizeBiIntelligentAstarDiag()}>
+                  BiDir+diagonal
+                </li>
               </div>
             </div>
           </div>
@@ -735,10 +726,14 @@ export default class PathfindingVisualizer extends Component {
                 <a>A-Star Algorithm</a>
               </div>
               <div class="optf">
-                <li onClick={() => this.visualizeAstar()}>option1</li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeAstar()}>A-Star</li>
+                <li onClick={() => this.visualizeBiAstarNodiagoanls()}>
+                  Bi-directional
+                </li>
+                <li onClick={() => this.visualizeOrthAstar()}>Orthogal</li>
+                <li onClick={() => this.visualizeBiAstarWithDiagonals()}>
+                  Bidir+Diagonal
+                </li>
               </div>
             </div>
           </div>
@@ -748,10 +743,12 @@ export default class PathfindingVisualizer extends Component {
                 <a>Best first Search</a>
               </div>
               <div class="optf">
-                <li onClick={() => this.visualizeBestfs()}>option1</li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeBestfs()}>Bestfs</li>
+                <li onClick={() => this.visualizeBiBestfs()}>Bi-directional</li>
+                <li onClick={() => this.visualizeBestfsDiag()}>Diagonal</li>
+                <li onClick={() => this.visualizeBiBestfsDiag()}>
+                  BiDir+diagonal
+                </li>
               </div>
             </div>
           </div>
@@ -762,9 +759,9 @@ export default class PathfindingVisualizer extends Component {
               </div>
               <div class="optf">
                 <li onClick={() => this.visualizeIBestfs()}>option1</li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeBiBestfs()}>option2</li>
+                <li onClick={() => this.visualizeIBestfsDiag()}>option3</li>
+                <li onClick={() => this.visualizeBiBestfsDiag()}>option4</li>
               </div>
             </div>
           </div>
@@ -774,14 +771,48 @@ export default class PathfindingVisualizer extends Component {
                 <a>IDA Star</a>
               </div>
               <div class="optf">
-                <li onClick={() => this.visualizeIDAstar()}>option1</li>
-                <li>option2</li>
-                <li>option3</li>
-                <li>option4</li>
+                <li onClick={() => this.visualizeIDAstar()}>IDA-Star</li>
+                <li onClick={() => this.visualizeIDAstarDiag()}>Diagonal</li>
               </div>
             </div>
           </div>
+          <div class="buttf2" tabindex="1">
+            <div class="buttf">
+              <div class="buttonfi">
+                <a>Jump Point</a>
+              </div>
+              <div class="optf">
+                <li onClick={() => this.visualizeJPS()}>Jump Point</li>
+                <li onClick={() => this.visualizeOrthJPS()}>Orthogonal</li>
+              </div>
+            </div>
+          </div>
+          <div className="walls">
+            WALLS
+            <div className="wallweight">
+              <input
+                type="radio"
+                id="infiwall"
+                name="radiowall"
+                value="finite"
+                checked={!this.state.fin}
+                onChange={this.handleOptionChangeinfinite}
+              />
+              <label for="infiwall">Infinite Wall</label>
+
+              <input
+                type="radio"
+                id="fiwall"
+                name="radiowall"
+                value="infinite"
+                checked={this.state.fin}
+                onChange={this.handleOptionChangefinite}
+              />
+              <label for="fiwall">Finite Walls</label>
+            </div>
+          </div>
         </div>
+
         <div className="inibutt">
           <div className="startendwrap">
             <div

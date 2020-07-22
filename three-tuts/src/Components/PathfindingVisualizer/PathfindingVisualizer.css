@@ -3,27 +3,22 @@ body,
 #root,
 canvas {
   position: static;
-  align-content: center;
   top: 200;
+  left: 100;
   width: 100vw;
   height: 80vh;
-  display: flex;
 }
 .grid {
-  margin-left: 135px;
+  text-align: center;
+  margin-top: 20px;
 }
-.button-wrapper {
-  display: flex;
-  width: 100%;
-  padding-top: 10px;
-  /* padding-left: 12px; */
-  /* flex-direction: row; */
-}
+
 .button-wrapper2 {
   display: inline-flex;
   height: 75px;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-right: 10px;
   background: rgba(66, 66, 66, 0.8);
 }
 .button {
@@ -40,27 +35,8 @@ canvas {
   cursor: pointer;
   color: white;
 }
-.button3 {
-  display: flex;
-  font-family: "Raleway", sans-serif;
-  font-size: 13px;
-  text-align: center;
-  align-items: center;
-  position: relative;
-  /* font-weight: bold; */
-  /* padding: 10px; */
-  /* margin-left: 0px; */
-  margin-right: 5px;
-  word-spacing: normal;
-  letter-spacing: 1px;
-  border: 0.5px solid white;
-  background: darkblue;
-  cursor: pointer;
-  color: white;
-  width: 120px;
-  height: 80px;
-}
-.button4 {
+
+.button2 {
   display: flex;
   font-family: "Raleway", sans-serif;
   font-size: 18px;
@@ -75,6 +51,11 @@ canvas {
   color: white;
   width: 120px;
   height: 60px;
+}
+
+.inibutt {
+  /* height: 110px; */
+  /* background-color: lightcoral; */
 }
 
 .startend {
@@ -187,7 +168,7 @@ canvas {
 .buttf {
   width: 120px;
   height: 60px;
-  background-color: crimson;
+  /* background-color: crimson; */
   /* margin-left: 5px;
   margin-right: 5px; */
 }
@@ -228,7 +209,7 @@ canvas {
   /* position: absolute; */
   width: 120px;
   height: 0px;
-  background: #a09090;
+  /* background: #a09090; */
   transition: 0.5s;
   cursor: pointer;
   overflow: hidden;
@@ -276,4 +257,60 @@ canvas {
 .buttf2:focus {
   box-shadow: 2px 4px 20px 4px rgba(255, 255, 255, 0.75);
   transform: scale(1.05);
+}
+
+.walls {
+  /* display: inline-flex; */
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  width: 220px;
+  height: 60px;
+  background-color: #540400;
+  margin-left: 10px;
+  text-align: center;
+  align-items: center;
+  color: #ffffff;
+  border: 2px solid #444;
+  border-radius: 4px;
+}
+
+.wallweight {
+  display: inline-flex;
+  width: 200px;
+  font-family: "Raleway", sans-serif;
+  word-spacing: normal;
+  letter-spacing: 2px;
+  margin-top: 1px;
+  /* background: black; */
+  cursor: pointer;
+  color: white;
+}
+
+.wallweight input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.wallweight label {
+  /* display: inline-block; */
+  background-color: #0b3b47;
+  text-align: center;
+  /* padding: 10px 20px; */
+  margin-right: 4px;
+  margin-left: 4px;
+  font-size: 14px;
+  border: 2px solid #444444;
+  border-radius: 4px;
+}
+
+.wallweight label:hover {
+  background-color: #056d87;
+}
+
+.wallweight input[type="radio"]:focus + label {
+  /* border: 2px dashed #444; */
+  background-color: #056d87;
+  border-color: #52adc4;
 }
