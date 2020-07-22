@@ -818,7 +818,11 @@ export default class PathfindingVisualizer extends Component {
             <div
               className="pauseresume"
               tabIndex="2"
-              onClick={() => this.pauseSearch(false)}
+              onClick={() =>
+                alert(`            Visualization is paused.
+          Click on Resume to continue.
+              `)
+              }
             ></div>
           </div>
 

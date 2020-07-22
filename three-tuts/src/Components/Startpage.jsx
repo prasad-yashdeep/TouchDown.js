@@ -7,49 +7,24 @@ function Startpage() {
       <div className="heading">INSTRUCTION</div>
       <div className="text-box2">
         <p style={{ color: "#fafafa" }}>
-          Your aim is to reach your destination from the
-          <strong>shortest path</strong>. The initial position of your robot
-          will be fixed. First you'll choose a destination where you wanna
-          reach. Then, You'll the algorithm you want to follow. After you choose
-          and click on "start", your robot will move in that shortest path
-          calculated via that algorithm.
+          Welcome to Mars! You will be taken to our land where you will have
+          some starting position and a destination; both can be altered by you
+          accordingly. Since you are all alone here, you have to reach your
+          destination as soon as possible. There will be many hurdles in your
+          way, which again can be decided by you. These hurdles will be in the
+          form of a weighted wall, and you have two kinds of walls: infinite
+          weighted and finite weighted walls. You cannot jump over the infinite
+          weighted wall at any cost whereas, in a finite weighted, you will
+          first choose a weight and then apply it your land and you can jump
+          over them, but this comes with some penalty. To help you find your
+          way, we have a bunch of algorithms which will help you to calculate
+          your <strong>shortest path</strong>. You can explore various options
+          under them.
+          <p style={{ color: "#fafafa" }}>
+            To land on Mars, click on <strong>START</strong>!
+          </p>
+          <p style={{ color: "#fafafa" }}>Enjoy your journey!</p>
         </p>
-      </div>
-      <div className="text-box3">
-        <label style={{ color: "white" }}>
-          <strong>Select Algorithm</strong>
-        </label>
-        <select
-          style={{
-            padding: "3px",
-            backgroundColor: "#59cbff",
-            fontSize: "15px",
-            fontFamily: "Raleway",
-          }}
-        >
-          <option value="Algorith-1">Algorithm1</option>
-          <option
-            style={{ padding: "3px", backgroundColor: "white" }}
-            value="Algorith-2"
-          >
-            Algorithm2
-          </option>
-          <option
-            style={{ padding: "3px", backgroundColor: "white" }}
-            value="Algorith-3"
-          >
-            Algorithm3
-          </option>
-          <option
-            style={{ padding: "3px", backgroundColor: "white" }}
-            value="Algorith-4"
-          >
-            Algorithm4
-          </option>
-        </select>
-      </div>
-      <div className="button-wrapper">
-        <div className="button">START</div>
       </div>
     </div>
   );

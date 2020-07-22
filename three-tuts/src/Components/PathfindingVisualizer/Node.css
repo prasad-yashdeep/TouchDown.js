@@ -32,7 +32,7 @@
   }
 
   50% {
-    background-color: rgba(17, 104, 217, 0.75);
+    background-color: rgba(44, 132, 247, 0.75);
   }
 
   75% {
@@ -42,15 +42,20 @@
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: rgba(60, 219, 243, 0.75);
   }
 }
 
 .node-wall {
-  background-color: grey;
+  /* background-color: grey; */
+  background-image: url(./images/brick_wall.jpg);
+  background-size: cover;
+  outline: 2px solid black;
 }
 .node-wallweight {
-  background-color: orange;
+  /* background-color: orange; */
+  background-image: url(./images/weighted_wall.jpg);
+  background-size: cover;
 }
 .node-shortest-path {
   animation-name: shortestPath;

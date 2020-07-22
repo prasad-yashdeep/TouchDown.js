@@ -47,14 +47,22 @@ class Model extends Component {
 
       <>
         <StartPage />
-        <div
-          onClick={async () => {
-            await this.zoom();
-            window.location = "http://localhost:3000/algo";
-          }}
-          className="canvas-div"
-        >
-          <Canvas camera={{ position: [0, 0, 20] }}>
+        <div className="button-wrapper">
+          <div
+            className="button"
+            onClick={async () => {
+              await this.zoom();
+              window.location = "http://localhost:3000/algo";
+            }}
+          >
+            START
+          </div>
+        </div>
+        <div className="canvas-div">
+          <Canvas
+            //style={{ height: 950, width: 1650 }}
+            camera={{ position: [0, 0, 20] }}
+          >
             <ambientLight intensity={1.0} />
             <pointLight intensity={0.9} position={[-10, -25, -10]} />
             <spotLight
