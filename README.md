@@ -2,9 +2,9 @@
 
 # Navigate Mars Rover using Pathfinding Algorithms
 
-<p style='text-align: justify;'> 
+
 This project is in compliance with **Microsoft Engage'20**.Microsoft Engage is an initiative by **Microsoft** to aid the **Mars Colonisation Programme**.In this project,a web application has been made to help the Mars Rover navigate the planet.The project will visualise the shortest path from a starting point till end point avoiding all the obstructions.We have implemented  AI based shortest path algorithms like **Astar,IDAstar,Best First Search,Jump Point Search** and **Orthogonal Jump Point Search** .We have also implemented **Dijkstra Algorithm** and **Breadth First Search Algorithm** to find the shortest path in the grid.We have given additional functionality of **Diagonal Search** and **Bi-Direction Search** to all possible algorithms.
- </p>
+
  
  To read more about the program : https://microsoft.acehacker.com/mars/
  
