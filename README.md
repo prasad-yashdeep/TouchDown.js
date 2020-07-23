@@ -3,10 +3,9 @@
 # Navigate Mars Rover using Pathfinding Algorithms
 
 
-This project is in compliance with **Microsoft Engage'20**.Microsoft Engage is an initiative by **Microsoft** to aid the **Mars Colonisation Programme**.In this project,a web application has been made to help the Mars Rover navigate the planet.The project will visualise the shortest path from a starting point till end point avoiding all the obstructions.We have implemented  AI based shortest path algorithms like **Astar,IDAstar,Best First Search,Jump Point Search** and **Orthogonal Jump Point Search** .We have also implemented **Dijkstra Algorithm** and **Breadth First Search Algorithm** to find the shortest path in the grid.We have given additional functionality of **Diagonal Search** and **Bi-Direction Search** to all possible algorithms.
+This project is in compliance with **Microsoft Engage'20**. Microsoft Engage is an initiative by **Microsoft** to aid the **Mars Colonisation Programme**.In this project,a web application has been developed which simulates a Mars rover finding a Path in the red planet .The project will visualise the shortest path from a starting point till end point avoiding all the obstructions. We have implemented  AI based shortest path algorithms like **Astar, IDAstar, Best First Search, Jump Point Search** and **Orthogonal Jump Point Search**. We have also implemented **Dijkstra** and **Breadth First Search Algorithm** to find the shortest path in the grid. We have given additional functionality of **Diagonal Search** and **Bi-Direction Search** to all possible algorithms. Along with that variuos types of heuristics measures can be selected for the AI algorithms.
 
- 
- To read more about the program : https://microsoft.acehacker.com/mars/
+To read more about the program : https://microsoft.acehacker.com/mars/
  
 # Additional Functionality
 We have provided the user with two kinds of walls.The user can place an infinite wall or a finite wall in the grid.The weight of the finite wall will be entered by the user through a prompt.A rover can never pass throught the infinite wall while if the rover attempts to pass throught the finite wall then the heuristic distance of the wall will suffer a penalty equal to the weight of the wall.The user can place as many kinds of finite wall with varying weights in the grid.The user can also adjust the starting point and end point of the search.
@@ -64,5 +63,14 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 # Dependencies : 
-React React-three-fiber react-spring react-router-dom three cannon.js three-orbitcontrols
+    "drei": "0.0.64",
+    "heap": "^0.2.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^4.2.17",
+    "three": "^0.118.3",
+    "three-orbitcontrols": "^2.110.3"
 
