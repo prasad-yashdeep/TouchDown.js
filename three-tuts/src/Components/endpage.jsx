@@ -1,5 +1,5 @@
 import { draco, OrbitControls } from "drei";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Component, Suspense, useEffect, useState } from "react";
 import { a, useTransition } from "react-spring";
 import { Canvas, useLoader } from "react-three-fiber";
 import * as THREE from "three";
