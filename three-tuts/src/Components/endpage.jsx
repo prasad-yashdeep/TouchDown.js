@@ -1,20 +1,37 @@
-import { OrbitControls } from "drei";
-import React, { Component, Suspense, useEffect, useState } from "react";
+import { draco, OrbitControls } from "drei";
+import React, { Suspense, useEffect, useState } from "react";
 import { a, useTransition } from "react-spring";
-import { Canvas } from "react-three-fiber";
+import { Canvas, useLoader } from "react-three-fiber";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import "./endpage.css";
+//import Url3d from "../../public/scene"
 
-const SpaceShip = () => {
-  const [model, setModel] = useState();
-
-  useEffect(() => {
-    new GLTFLoader().load("/scene.gltf", setModel);
-  });
-
-  return model ? <primitive object={model.scene} /> : null;
-};
+function Model({ url }) {
+  const { nodes, materials } = useLoader(GLTFLoader, url, draco());
+  return (
+    <group
+      rotation={[-Math.PI / 2, 0, 0]}
+      position={[0, -7, 0]}
+      scale={[7, 7, 7]}
+    >
+      <group rotation={[Math.PI / 13.5, -Math.PI / 5.8, Math.PI / 5.6]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.planet001.geometry}
+          material={materials.scene}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.planet002.geometry}
+          material={materials.scene}
+        />
+      </group>
+    </group>
+  );
+}
 function Loading() {
   const [finished, set] = useState(false);
   const [width, setWidth] = useState(0);
@@ -73,7 +90,7 @@ class endpage extends Component {
           />
           <fog attach="fog" args={["#cc7b32", 20, 25]} />
           <Suspense fallback={null}>
-            <SpaceShip />
+            <Model url="/scene-draco.gltf" />
           </Suspense>
           <OrbitControls
             autoRotate
