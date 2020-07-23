@@ -22,12 +22,6 @@ function Model({ url }) {
           geometry={nodes.planet001.geometry}
           material={materials.scene}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet002.geometry}
-          material={materials.scene}
-        />
       </group>
     </group>
   );

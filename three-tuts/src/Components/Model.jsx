@@ -75,7 +75,7 @@ class Model extends Component {
               shadow-mapSize-height={2048}
             />
             <Controls />
-            <SpaceShip></SpaceShip>
+
             <Mars position={[1.2, 0, 0]} scale={this.state.scale} />
           </Canvas>
         </div>
