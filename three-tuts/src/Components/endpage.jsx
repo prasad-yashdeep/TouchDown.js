@@ -55,12 +55,12 @@ class endpage extends Component {
           <span></span>
         </h1>
         <Canvas
+          style={{ height: 950 }}
           shadowMap
           camera={{ position: [0, 0, 21] }}
-          style={{ height: 950 }}
         >
           <ambientLight intensity={0.75} />
-          <pointLight intensity={1} position={[-10, -32, -10]} />
+          <pointLight intensity={1} position={[-10, -30, -10]} />
           <spotLight
             castShadow
             intensity={2.25}
@@ -71,14 +71,14 @@ class endpage extends Component {
             shadow-mapSize-height={1024}
             shadow-bias={-0.0001}
           />
-          <fog attach="fog" args={["#cc7b32", 20, 30]} />
+          <fog attach="fog" args={["#cc7b32", 20, 25]} />
           <Suspense fallback={null}>
             <SpaceShip />
           </Suspense>
           <OrbitControls
             autoRotate
             enablePan={false}
-            enableZoom={false}
+            enableZoom={true}
             enableDamping
             dampingFactor={0.5}
             rotateSpeed={1}
