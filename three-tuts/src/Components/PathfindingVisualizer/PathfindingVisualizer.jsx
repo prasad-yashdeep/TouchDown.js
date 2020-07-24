@@ -1290,7 +1290,8 @@ export default class PathfindingVisualizer extends Component {
           <div className="startendwrap">
             <div
               onClick={async () => {
-                window.location = "http://localhost:3000/end";
+                window.location =
+                  "https://hackgod2000.github.io/TouchDown.js/#/end";
               }}
               className="startend2"
             >
