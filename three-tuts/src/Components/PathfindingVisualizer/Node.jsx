@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./Node.css";
 
 export default class Node extends Component {
+  sayhello() {
+    console.log("chutiye");
+  }
   render() {
     const {
       col,
@@ -9,9 +12,12 @@ export default class Node extends Component {
       isStart,
       isWall,
       isWallweight,
+      onDragStart,
+      draggable = false,
       onMouseDown,
       onMouseEnter,
       onMouseUp,
+      onDrop,
       row,
     } = this.props;
     const extraClassName = isFinish
@@ -23,14 +29,38 @@ export default class Node extends Component {
       : isWallweight
       ? "node-wallweight"
       : "";
+    window.ondragover = function (e) {
+      e.preventDefault();
+      return false;
+    };
+    window.ondrop = function (e) {
+      e.preventDefault();
+      return false;
+    };
+    const dragEnter = (e) => {
+      e.preventDefault();
+      e.target.style.background = "rgba(113, 235, 52, 0.5)";
+    };
 
+    const dragLeave = (e) => {
+      e.target.style.background = null;
+    };
     return (
       <div
         id={`node-${row}-${col}`}
         className={`node ${extraClassName}`}
-        onMouseDown={() => onMouseDown(row, col)}
-        onMouseEnter={() => onMouseEnter(row, col)}
-        onMouseUp={() => onMouseUp()}
+        dataS={isStart}
+        dataF={isFinish}
+        rowdata={row}
+        coldata={col}
+        draggable={draggable}
+        onMouseDown={() => !draggable && onMouseDown(row, col)}
+        onMouseEnter={() => !draggable && onMouseEnter(row, col)}
+        onMouseUp={() => !draggable && onMouseUp()}
+        //onDragEnter={(e) => !draggable && dragEnter(e)}
+        //onDragLeave={(e) => !draggable && dragLeave(e)}
+        onDragStart={(e) => draggable && onDragStart(e, isStart, isFinish)}
+        onDrop={(e) => !draggable && onDrop(e)}
       ></div>
     );
   }

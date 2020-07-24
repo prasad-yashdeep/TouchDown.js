@@ -8,10 +8,10 @@ import "./endpage.css";
 
 const SpaceShip = () => {
   const [model, setModel] = useState();
-  console.log("Reaching here");
+
   useEffect(() => {
     new GLTFLoader().load("./scene-draco.gltf", setModel);
-  });
+  }, []);
 
   return model ? <primitive object={model.scene} /> : null;
 };
@@ -24,7 +24,7 @@ function Loading() {
     THREE.DefaultLoadingManager.onLoad = () => set(true);
     THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) =>
       setWidth((itemsLoaded / itemsTotal) * 200);
-  }, []);
+  });
 
   const props = useTransition(finished, null, {
     from: { opacity: 1, width: 0 },
@@ -46,7 +46,10 @@ function Loading() {
 
 class endpage extends Component {
   state = {};
+
   render() {
+    const h = window.height;
+
     return (
       <>
         <div className="bg" />
@@ -56,7 +59,7 @@ class endpage extends Component {
           <span></span>
         </h1>
         <Canvas
-          style={{ height: 950 }}
+          style={{ height: 1050 }}
           shadowMap
           camera={{ position: [0, 0, 21] }}
         >

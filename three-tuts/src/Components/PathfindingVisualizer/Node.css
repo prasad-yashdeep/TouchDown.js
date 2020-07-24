@@ -1,16 +1,26 @@
 .node {
-  width: 25px;
-  height: 25px;
+  width: 17px;
+  height: 17px;
   outline: 1px solid rgb(175, 216, 248);
   display: inline-block;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .node-finish {
   background-color: red;
+  background-image: url(./images/flag.jpg);
+  background-size: cover;
+  box-shadow: 2px 4px 20px 7px rgb(255, 0, 0);
+  outline: 1px solid rgb(255, 0, 0);
 }
 
 .node-start {
   background-color: green;
+  background-image: url(./images/astronaut.jpg);
+  background-size: cover;
+  box-shadow: 2px 4px 20px 7px rgb(9, 255, 0);
+  outline: 1px solid rgb(9, 255, 0);
 }
 
 .node-visited {

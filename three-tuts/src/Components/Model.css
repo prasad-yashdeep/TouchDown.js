@@ -2,10 +2,12 @@ html,
 body,
 #root,
 canvas {
-  margin: 0;
-  padding: 0;
+  position: static;
+  top: 200;
+  left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  z-index: -1;
 }
 .text-box {
   font-size: 30px;
@@ -18,7 +20,7 @@ canvas {
   color: rgb(238, 238, 238);
 }
 .text-box2 {
-  font-size: 12px;
+  font-size: 13px;
   font-family: "Raleway", sans-serif;
   letter-spacing: 2px;
   word-spacing: 5px;
@@ -36,10 +38,8 @@ canvas {
 }
 .button-wrapper {
   display: flex;
-  /*justify-content: left;*/
-  /*align-items: center;*/
   padding-top: 10px;
-  padding-left: 0px;
+  margin-left: 10px;
   flex-direction: row;
 }
 .button {

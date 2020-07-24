@@ -2,12 +2,11 @@ import React, { Component, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
 import * as THREE from "three";
 import Controls from "./Controls";
-import img1 from "./images/background.png";
+import img1 from "./images/background.jpg";
 import bumperURL from "./images/marsbump1k.jpg";
 import marsURL from "./images/marsmap1k.jpg";
 import "./Model.css";
 import StartPage from "./Startpage";
-
 console.log(bumperURL);
 
 class Model extends Component {
@@ -21,6 +20,8 @@ class Model extends Component {
     this.enlarge = this.enlarge.bind(this);
   }
   componentDidMount() {
+    const data = new Array(1000).fill(0).map((d, id) => ({ id }));
+    this.setState({ data });
     document.body.style.backgroundImage = `url(${img1})`;
   }
   enlarge(i, j, k) {
@@ -52,18 +53,14 @@ class Model extends Component {
             className="button"
             onClick={async () => {
               await this.zoom();
-              window.location =
-                "https://hackgod2000.github.io/TouchDown.js/#/algo";
+              window.location = "http://localhost:3000/algo";
             }}
           >
             START
           </div>
         </div>
         <div className="canvas-div">
-          <Canvas
-            //style={{ height: 950, width: 1650 }}
-            camera={{ position: [0, 0, 20] }}
-          >
+          <Canvas camera={{ position: [0, 0, 20] }}>
             <ambientLight intensity={1.0} />
             <pointLight intensity={0.9} position={[-10, -25, -10]} />
             <spotLight
@@ -75,7 +72,6 @@ class Model extends Component {
               shadow-mapSize-height={2048}
             />
             <Controls />
-
             <Mars position={[1.2, 0, 0]} scale={this.state.scale} />
           </Canvas>
         </div>
