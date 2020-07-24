@@ -53,7 +53,8 @@ class Model extends Component {
             className="button"
             onClick={async () => {
               await this.zoom();
-              window.location = "http://localhost:3000/algo";
+              window.location =
+                "https://hackgod2000.github.io/TouchDown.js/#/algo";
             }}
           >
             START
