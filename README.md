@@ -6,8 +6,8 @@
 This project is in compliance with **Microsoft Engage'20**. Microsoft Engage is an initiative by **Microsoft** to aid the **Mars Colonisation Programme**.In this project,a web application has been developed which simulates a Mars rover finding a Path in the red planet .The project will visualise the shortest path from a starting point till end point avoiding all the obstructions. We have implemented  AI based shortest path algorithms like **Astar, IDAstar, Best First Search, Jump Point Search** and **Orthogonal Jump Point Search**. We have also implemented **Dijkstra** and **Breadth First Search Algorithm** to find the shortest path in the grid. We have given additional functionality of **Diagonal Search** and **Bi-Direction Search** to all possible algorithms. Along with that variuos types of heuristics measures can be selected for the AI algorithms.
 
 To read more about the program : https://microsoft.acehacker.com/mars/
-## LINK OF THE DEMO : https://hackgod2000.github.io/TouchDown.js/
-## Link of the FlowChart : https://app.lucidchart.com/invitations/accept/a21c7dbf-7dc0-4f6c-af41-7a0ac7c99181
+### LINK OF THE DEMO : https://hackgod2000.github.io/TouchDown.js/
+### Link of the FlowChart : https://app.lucidchart.com/invitations/accept/a21c7dbf-7dc0-4f6c-af41-7a0ac7c99181
  
 # Additional Functionality
 We have provided the user with two kinds of walls.The user can place an infinite wall or a finite wall in the grid.The weight of the finite wall will be entered by the user through a prompt.A rover can never pass throught the infinite wall while if the rover attempts to pass throught the finite wall then the heuristic distance of the wall will suffer a penalty equal to the weight of the wall.The user can place as many kinds of finite wall with varying weights in the grid.The user can also adjust the starting point and end point of the search.
