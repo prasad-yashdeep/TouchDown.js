@@ -8,9 +8,9 @@ import "./endpage.css";
 
 const SpaceShip = () => {
   const [model, setModel] = useState();
-
+  console.log("Reaching here");
   useEffect(() => {
-    new GLTFLoader().load("/scene-draco.gltf", setModel);
+    new GLTFLoader().load("./scene-draco.gltf", setModel);
   });
 
   return model ? <primitive object={model.scene} /> : null;
