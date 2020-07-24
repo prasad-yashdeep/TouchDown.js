@@ -9,7 +9,7 @@ import "./endpage.css";
 const SpaceShip = () => {
   const [model, setModel] = useState();
 
-  cosole.log("Reaching here");
+  console.log("Reaching here");
   useEffect(() => {
     new GLTFLoader().load("./scene-draco.gltf", setModel);
   }, []);
