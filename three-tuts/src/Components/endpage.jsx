@@ -53,57 +53,58 @@ class endpage extends Component {
 
     return (
       <>
-        <div className="bg" />
-        <h1>
-          TheEnd
-          <br />
-          <span></span>
-        </h1>
-        <Canvas
-          style={{ height: 1050 }}
-          shadowMap
-          camera={{ position: [0, 0, 21] }}
-        >
-          <ambientLight intensity={0.75} />
-          <pointLight intensity={1} position={[-10, -30, -10]} />
-          <spotLight
-            castShadow
-            intensity={2.25}
-            angle={0.2}
-            penumbra={1}
-            position={[25, 25, 25]}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-bias={-0.0001}
+        <div className="bg">
+          <h1>
+            TheEnd
+            <br />
+            <span></span>
+          </h1>
+          <Canvas
+            style={{ height: 1050 }}
+            shadowMap
+            camera={{ position: [0, 0, 21] }}
+          >
+            <ambientLight intensity={0.75} />
+            <pointLight intensity={1} position={[-10, -30, -10]} />
+            <spotLight
+              castShadow
+              intensity={2.25}
+              angle={0.2}
+              penumbra={1}
+              position={[25, 25, 25]}
+              shadow-mapSize-width={1024}
+              shadow-mapSize-height={1024}
+              shadow-bias={-0.0001}
+            />
+            <fog attach="fog" args={["#cc7b32", 20, 25]} />
+            <Suspense fallback={null}>
+              <SpaceShip></SpaceShip>
+            </Suspense>
+            <OrbitControls
+              autoRotate
+              enablePan={false}
+              enableZoom={true}
+              enableDamping
+              dampingFactor={0.5}
+              rotateSpeed={1}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+            />
+          </Canvas>
+          <div className="layer" />
+          <Loading />
+          <a
+            href="https://github.com/HackGod2000/TouchDown.js"
+            className="top-left"
+            children="Github"
           />
-          <fog attach="fog" args={["#cc7b32", 20, 25]} />
-          <Suspense fallback={null}>
-            <SpaceShip></SpaceShip>
-          </Suspense>
-          <OrbitControls
-            autoRotate
-            enablePan={false}
-            enableZoom={true}
-            enableDamping
-            dampingFactor={0.5}
-            rotateSpeed={1}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-        </Canvas>
-        <div className="layer" />
-        <Loading />
-        <a
-          href="https://github.com/HackGod2000/TouchDown.js"
-          className="top-left"
-          children="Github"
-        />
 
-        <a
-          href="https://github.com/drcmda/react-three-fiber"
-          className="top-right"
-          children="+ react-three-fiber"
-        />
+          <a
+            href="https://github.com/drcmda/react-three-fiber"
+            className="top-right"
+            children="+ react-three-fiber"
+          />
+        </div>
       </>
     );
   }
