@@ -24,7 +24,7 @@ function heurestics(a,b,h){
     }
 }
 function dblock(cX,cY,dX,dY,grid){
-    if (grid[cX-dX][cY].wallweight > 99999998 && grid[cX][cY-dY].wallweight > 99999998){
+    if (grid[cX-dX][cY].isWall && grid[cX][cY-dY].isWall){
         return true
     }
     return false
@@ -38,21 +38,21 @@ function blocked(cX,cY,dX,dY,grid){
         return true
     }
     if (dX !== 0 && dY !== 0){
-        if (grid[cX + dX][cY].wallweight > 99999998&& grid[cX][cY+dY].wallweight > 99999998){
+        if (grid[cX + dX][cY].isWall && grid[cX][cY+dY].isWall){
             return true
         }
-        if (grid[cX + dX][cY + dY].wallweight > 99999998){
+        if (grid[cX + dX][cY + dY].isWall){
             return true
         }
     }
     else{
         if (dX !== 0){
-            if (grid[cX+dX][cY].wallweight > 99999998){
+            if (grid[cX+dX][cY].isWall){
                 return true
             }
         }
         else{
-            if (grid[cX][cY+dY].wallweight > 99999998){
+            if (grid[cX][cY+dY].isWall){
                 return true
             }
         }
@@ -238,7 +238,7 @@ export function jps(grid,startNode,finishNode,h){
                 if (!successor.inopen || val < successor.gscore){
                     successor.gscore = val;
                     successor.hscore = heurestics(successor,finishNode,h)
-                    successor.fscore = successor.gscore + successor.hscore*successor.wallweight
+                    successor.fscore = successor.gscore + successor.hscore
                     successor.previousNode = node
                     if (!successor.inopen){
                         openList.push(successor)

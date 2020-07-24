@@ -57,8 +57,6 @@ export default class Node extends Component {
         onMouseDown={() => !draggable && onMouseDown(row, col)}
         onMouseEnter={() => !draggable && onMouseEnter(row, col)}
         onMouseUp={() => !draggable && onMouseUp()}
-        //onDragEnter={(e) => !draggable && dragEnter(e)}
-        //onDragLeave={(e) => !draggable && dragLeave(e)}
         onDragStart={(e) => draggable && onDragStart(e, isStart, isFinish)}
         onDrop={(e) => !draggable && onDrop(e)}
       ></div>

@@ -18,8 +18,6 @@ function Controls() {
       args={[camera, gl.domElement]}
       enableRotate
       enablePan={true}
-      //maxPolarAngle={Math.PI / 3}
-      //minPolarAngle={Math.PI}
     />
   );
 }

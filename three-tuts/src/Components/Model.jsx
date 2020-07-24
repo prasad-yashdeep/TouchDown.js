@@ -13,15 +13,12 @@ class Model extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
       scale: [1, 1, 1],
     };
     this.zoom = this.zoom.bind(this);
     this.enlarge = this.enlarge.bind(this);
   }
   componentDidMount() {
-    const data = new Array(1000).fill(0).map((d, id) => ({ id }));
-    this.setState({ data });
     document.body.style.backgroundImage = `url(${img1})`;
   }
   enlarge(i, j, k) {
@@ -39,13 +36,7 @@ class Model extends Component {
     }
   }
   render() {
-    const { data } = this.state;
-    //<SpaceShip />
-    //
-    //console.log(data);
     return (
-      //  Sonali startpage.jsx controls the design element of the page.
-
       <>
         <StartPage />
         <div className="button-wrapper">
@@ -85,12 +76,7 @@ function sleep(ms) {
 }
 
 function Mars(props) {
-  // This reference will give us direct access to the mesh
   const mesh = useRef();
-
-  //const clothTexture = useLoader(TextureLoader(), marsURL);
-  //console.log(clothTexture);
-  // Set up state for the hovered and active state
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
   const imgmars = useMemo(() => new THREE.TextureLoader().load(marsURL), [

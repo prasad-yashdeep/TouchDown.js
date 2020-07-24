@@ -4,7 +4,7 @@ export function bfs(grid,startNode,finishNode,diagonalallowed){
   const queue = [startNode];
   while (!!queue.length){
     const closestNode = queue.shift();
-    if (closestNode.wallweight === 99999999) continue ;
+    if (closestNode.isWall) continue ;
     if (closestNode.distance === Infinity) return visitedNodesInOrder;
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
@@ -13,12 +13,11 @@ export function bfs(grid,startNode,finishNode,diagonalallowed){
     for (const neighbor of unvisitedNeighbors){
       neighbor.previousNode = closestNode;
       neighbor.isVisited = true;
-      neighbor.distance = closestNode.distance + neighbor.wallweight;
+      neighbor.distance = closestNode.distance + 1;
       queue.push(neighbor);
     }
 
   }
-  return visitedNodesInOrder
 }
 function sortNodesByDistance(unvisitedNodes) {
   unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);

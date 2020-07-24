@@ -1,9 +1,10 @@
 //My variation of A star algorithm
+//Bi directional search of Dijkstra algorithm with heuristics
 import _ from "lodash" ;
 export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) {
     const visitedNodesInOrder = []; //closed list
-    const TempEnd=[];
-    const TempStart=[];
+    const TempEnd=[]; //Nodes from ending node till intersection node
+    const TempStart=[]; //Nodes from starting node till intersection node
     const tempstart = _.cloneDeep(startNode);
     tempstart.distance=0;
     const tempend = _.cloneDeep(finishNode);
@@ -26,11 +27,12 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
       updateUnvisitedNeighborsStart(closestNode, grid,finishNode,heuristic,diagonalallowed,TempStart,closestNode.wallweight);
         if(closestNode === finishNode) 
         {
-      console.log("Hello");
+      //console.log("Hello");
         var temp1 = [closestNode];
         visitedNodesInOrder.unshift(temp1)
         return visitedNodesInOrder;
         }
+        //if the node with shortest distance is the intersection node
         if (closestNode.endvisited)
         {
         // console.log("Hi");
@@ -38,7 +40,7 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
         visitedNodesInOrder.unshift(temp2)
         return visitedNodesInOrder;
         }
-
+        //Extract the node woth shortest distance from TempEnd
         sortNodesByDistance(TempEnd);
       const closestNode2 = TempEnd.shift();
       // If we encounter a wall, we skip it.
@@ -51,7 +53,7 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
       visitedNodesInOrder.push(closestNode2);  
       if(closestNode2 === startNode) 
         {
-      console.log("Hello");
+      //console.log("Hello");
         var temp1 = [closestNode2];
         visitedNodesInOrder.unshift(temp1)
         return visitedNodesInOrder;
@@ -64,6 +66,7 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
         return visitedNodesInOrder;
         }
     }
+    //If tempStart has nodes left within it
     while(TempStart.length>0)
     {
         sortNodesByDistance(TempStart);
@@ -76,13 +79,15 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
       closestNode.startvisited = true;
       visitedNodesInOrder.push(closestNode);
       updateUnvisitedNeighborsStart(closestNode, grid,finishNode,heuristic,diagonalallowed,TempStart,closestNode.wallweight);
-        if(closestNode === finishNode) 
+      //If no intersection node is found  
+      if(closestNode === finishNode) 
         {
-      console.log("Hello");
+      //console.log("Hello");
         var temp1 = [closestNode];
         visitedNodesInOrder.unshift(temp1)
         return visitedNodesInOrder;
         }
+        //if intersection node is found we stop the search
         if (closestNode.endvisited)
         {
         // console.log("Hi");
@@ -91,6 +96,7 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
         return visitedNodesInOrder;
         }
     }
+    //While Nodes in TempEnd are left
     while(TempEnd.length>0)
     {
         sortNodesByDistance(TempEnd);
@@ -103,13 +109,15 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
         closestNode2.endvisited = true;
         updateUnvisitedNeighborsEnd(closestNode2, grid,finishNode,heuristic,diagonalallowed,TempEnd,closestNode2.wallweight);
         visitedNodesInOrder.push(closestNode2);  
+        //If intersection node is not found
         if(closestNode2 === startNode) 
           {
-        console.log("Hello");
+        //console.log("Hello");
           var temp1 = [closestNode2];
           visitedNodesInOrder.unshift(temp1)
           return visitedNodesInOrder;
           }
+          //if intersection node is found we stop the search
           if (closestNode2.startvisited)
           {
           // console.log("Hi");
@@ -119,18 +127,16 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
           }
     }
 }
-  
+  //to sort the nodes by distance
   function sortNodesByDistance(unvisitedNodes) {
     unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
   }
-  
+  //To update the heuristic of unvisited neighbors starting from start node
   function updateUnvisitedNeighborsStart(node, grid,finishNode,heuristic,diagonalallowed,TempStart,wallweight) {
     const unvisitedNeighbors = getUnvisitedNeighbors(node, grid,diagonalallowed);
     for (const neighbor of unvisitedNeighbors) {
         if (neighbor.startvisited) continue ;
-      console.log(finishNode.col);
-      console.log(neighbor.col);
-      var value;
+      var value; //here value variable will store the heuristic distance
       var string="Manhattan";
       var string2="Diagonal";
       var string3="Euclidean";
@@ -139,45 +145,44 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
       if(heuristic.localeCompare(string)==0)
       {
         value=Math.abs(neighbor.row-finishNode.row)+Math.abs(neighbor.col-finishNode.col);
-        console.log(value);
+        
       }
       else if(heuristic.localeCompare(string2)==0)
       {
         value=Math.max(Math.abs(neighbor.row-finishNode.row),Math.abs(neighbor.col-finishNode.col));
-        console.log(value);
+       
       }
       else if(heuristic.localeCompare(string3)==0)
       {
         value=Math.sqrt(Math.pow((neighbor.row-finishNode.row),2)+Math.pow((neighbor.col-finishNode.col),2));
-        console.log(value);
+        
       }
       else if(heuristic.localeCompare(string4)==0)
       {
         var x_dist=Math.abs(neighbor.row-finishNode.row);
         var y_dist=Math.abs(neighbor.col-finishNode.col);
         value=Math.max(x_dist,y_dist)+(Math.sqrt(2)-1) * Math.min(x_dist,y_dist);
-        console.log(value);
+        
       }
       else if(heuristic.localeCompare(string5)==0)
       {
         value=Math.max(Math.abs(neighbor.row-finishNode.row),Math.abs(neighbor.col-finishNode.col));
-        console.log(value);
+        
       }
-      var temp= node.distance + wallweight*value;
-      neighbor.distance=temp;
+      var temp= node.distance + wallweight*value; //adjusting the distance of the neighbor as nodes distance + penalty*heuristic
+      neighbor.distance=temp; //penalty will be 1 if neighbor is not a weighted wall otherwise weighted wall will have a penalty
       neighbor.previousNode = node;
           neighbor.startvisited = true;
           TempStart.push(neighbor);
     }
   }
-  
+  //To update the heuristic of unvisited neighbors starting from end node
   function updateUnvisitedNeighborsEnd(node, grid,finishNode,heuristic,diagonalallowed,TempEnd,wallweight) {
     const unvisitedNeighbors = getUnvisitedNeighbors(node, grid,diagonalallowed);
     for (const neighbor of unvisitedNeighbors) {
         if (neighbor.endvisited) continue ;
-      console.log(finishNode.col);
-      console.log(neighbor.col);
-      var value;
+      
+      var value; //here value variable will store the heuristic distance
       var string="Manhattan";
       var string2="Diagonal";
       var string3="Euclidean";
@@ -186,39 +191,39 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
       if(heuristic.localeCompare(string)==0)
       {
         value=Math.abs(neighbor.row-finishNode.row)+Math.abs(neighbor.col-finishNode.col);
-        console.log(value);
+       
       }
       else if(heuristic.localeCompare(string2)==0)
       {
         value=Math.max(Math.abs(neighbor.row-finishNode.row),Math.abs(neighbor.col-finishNode.col));
-        console.log(value);
+        
       }
       else if(heuristic.localeCompare(string3)==0)
       {
         value=Math.sqrt(Math.pow((neighbor.row-finishNode.row),2)+Math.pow((neighbor.col-finishNode.col),2));
-        console.log(value);
+        
       }
       else if(heuristic.localeCompare(string4)==0)
       {
         var x_dist=Math.abs(neighbor.row-finishNode.row);
         var y_dist=Math.abs(neighbor.col-finishNode.col);
         value=Math.max(x_dist,y_dist)+(Math.sqrt(2)-1) * Math.min(x_dist,y_dist);
-        console.log(value);
+       
       }
       else if(heuristic.localeCompare(string5)==0)
       {
         value=Math.max(Math.abs(neighbor.row-finishNode.row),Math.abs(neighbor.col-finishNode.col));
-        console.log(value);
+        
       }
-      var temp= node.distance + value*wallweight;
-      neighbor.distance=temp;
+      var temp= node.distance + value*wallweight; //adjusting the distance of the neighbor as nodes distance + penalty*heuristic
+      neighbor.distance=temp; //penalty will be 1 if neighbor is not a weighted wall otherwise weighted wall will have a penalty
       neighbor.next=node; 
     // neighbor.previousNode = closestNodeEnd;
-     neighbor.endvisited = true;
+     neighbor.endvisited = true; 
      TempEnd.push(neighbor);
     }
   }
-  
+  //Get all neighbors
   function getUnvisitedNeighbors(node, grid,diagonalallowed) {
     const neighbors = [];
     const {col, row} = node;
@@ -236,25 +241,5 @@ export function BiIastar(grid, startNode, finishNode,heuristic,diagonalallowed) 
     return neighbors;
   }
   
-  function getAllNodes(grid) {
-    const nodes = [];
-    for (const row of grid) {
-      for (const node of row) {
-        nodes.push(node);
-      }
-    }
-    return nodes;
-  }
   
-  // Backtracks from the finishNode to find the shortest path.
-  // Only works when called *after* the dijkstra method above.
-  function getNodesInShortestPathOrder(finishNode) {
-    const nodesInShortestPathOrder = [];
-    let currentNode = finishNode;
-    while (currentNode !== null) {
-      nodesInShortestPathOrder.unshift(currentNode);
-      currentNode = currentNode.previousNode;
-    }
-    return nodesInShortestPathOrder;
-  }
   

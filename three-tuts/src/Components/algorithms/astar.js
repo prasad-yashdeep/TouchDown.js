@@ -1,6 +1,6 @@
 function isReachable(grid,r,c){
     if (-1 < r && -1 < c && r < grid.length && c <grid[0].length){
-        if (!grid[r][c].wallweight < 99999999){
+        if (!grid[r][c].isWall){
             return true
         }
     }
@@ -8,6 +8,7 @@ function isReachable(grid,r,c){
 }
 function getneighbors(grid,node,diagonalallowed){
     var neighbors = []; 
+    console.log(diagonalallowed)
     // else{
     var temp = [[-1,0],[0,-1],[0,1],[1,0]]
     // }
@@ -40,15 +41,12 @@ export function Astar(grid,startNode,finishNode,h,diagonalallowed){
     const visitedNodesInOrder = [];
     while (!openList.empty()) {
         var node = openList.pop();
-        if (node.isWall && node.wallweight === 99999999) {
-            continue ;
-        }
         node.inclosed = true;
-
         visitedNodesInOrder.push(node)
         if (node === finishNode){
             return visitedNodesInOrder;
         }
+        // console.log("ji")
         var neighbors = getneighbors(grid,node,diagonalallowed)
         for (var i = 0; i<neighbors.length;i++){
             var neighbor = neighbors[i];
@@ -58,7 +56,7 @@ export function Astar(grid,startNode,finishNode,h,diagonalallowed){
                 if (!neighbor.inopen || ng < neighbor.gscore) {
                     neighbor.gscore = ng;
                     neighbor.hscore = heuristic(neighbor,finishNode);
-                    neighbor.fscore = neighbor.gscore + neighbor.hscore*neighbor.wallweight;
+                    neighbor.fscore = neighbor.gscore + neighbor.hscore;
                     neighbor.previousNode = node;
 
                     if (!neighbor.inopen) {

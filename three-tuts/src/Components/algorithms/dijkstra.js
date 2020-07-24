@@ -8,36 +8,36 @@ export function dijkstra(grid, startNode, finishNode,diagonalallowed) {
   const unvisitedNodes = getAllNodes(grid);
   while (unvisitedNodes.length>0) {
     sortNodesByDistance(unvisitedNodes);
-    const closestNode = unvisitedNodes.shift();
+    const closestNode = unvisitedNodes.shift(); //closestNode is the node with shortest distance
     // If we encounter a wall, we skip it.
-    if (closestNode.isWall && closestNode.wallweight==99999999) 
+    if ((closestNode.isWallweight || closestNode.isWall) && closestNode.wallweight==99999999) 
     {
-      console.log(closestNode.wallweight);
+      //console.log(closestNode.wallweight);
       continue;
     }
     // If the closest node is at a distance of infinity,
     // we must be trapped and should therefore stop.
-    if (closestNode.distance === Infinity) return visitedNodesInOrder;
+    if (closestNode.distance === Infinity) return visitedNodesInOrder; //if the shortest node is infinity then we return the visitedNodeinorder
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
-    if (closestNode === finishNode) return visitedNodesInOrder;
+    if (closestNode === finishNode) return visitedNodesInOrder; //if we reach the finish node then we return the visitedNodesInOrder
     updateUnvisitedNeighbors(closestNode, grid,diagonalallowed,closestNode.wallweight);
   }
 }
-
+//sort all nodes by distance
 function sortNodesByDistance(unvisitedNodes) {
   unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
-
+//update heuristic of unvisited neighbors
 function updateUnvisitedNeighbors(node, grid,diagonalallowed,wallweight) {
   const unvisitedNeighbors = getUnvisitedNeighbors(node, grid,diagonalallowed);
   for (const neighbor of unvisitedNeighbors) {
-    neighbor.distance = node.distance + wallweight;
-    neighbor.previousNode = node;
+    neighbor.distance = node.distance + wallweight; //making the neighbor distance as node.distance + wall weight
+    neighbor.previousNode = node; //making the node as previous node of neighbor
     neighbor.isVisited=true;
   }
 }
-
+//get all unvisited neighbors
 function getUnvisitedNeighbors(node, grid,diagonalallowed) {
   const neighbors = [];
   const {col, row} = node;
@@ -54,7 +54,7 @@ function getUnvisitedNeighbors(node, grid,diagonalallowed) {
   }
   return neighbors.filter(neighbor => !neighbor.isVisited);
 }
-
+//get all nodes of a grid
 function getAllNodes(grid) {
   const nodes = [];
   for (const row of grid) {

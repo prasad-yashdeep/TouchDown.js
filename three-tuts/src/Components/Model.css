@@ -6,7 +6,7 @@ canvas {
   top: 200;
   left: 0;
   width: 100vw;
-  height: 80vh;
+  min-height: 100vh;
   z-index: -1;
 }
 .text-box {

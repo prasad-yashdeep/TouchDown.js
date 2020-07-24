@@ -18,7 +18,7 @@ import img1 from "../images/marsmap1k.jpg";
 import Node from "./Node";
 import "./PathfindingVisualizer.css";
 
-const t_rows = 20;
+const t_rows = 25;
 const t_cols = 50;
 
 export default class PathfindingVisualizer extends Component {
@@ -37,6 +37,7 @@ export default class PathfindingVisualizer extends Component {
       startnodecol: 17,
       finishnoderow: 10,
       finishnodecol: 38,
+      Algo: "",
     };
     this.handleheuristic1 = this.handleheuristic1.bind(this);
     this.handleheuristic2 = this.handleheuristic2.bind(this);
@@ -233,6 +234,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeOrthAstar() {
     const { grid } = this.state;
+    this.state.Algo = "Ort-Astar";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = Astar(
@@ -247,6 +249,8 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeAstar() {
     const { grid } = this.state;
+    this.state.Algo = "Astar";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = Astar(
@@ -261,6 +265,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiAstarWithDiagonals() {
     const { grid } = this.state;
+    this.state.Algo = "Bi+Diag-Astar";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = BiAstar(
@@ -278,6 +283,8 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiAstarNodiagoanls() {
     const { grid } = this.state;
+    this.state.Algo = "Bi+Orth-Astar";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = BiAstar(
@@ -295,6 +302,8 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeJPS() {
     const { grid } = this.state;
+    this.state.Algo = "JPS";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = jps(
@@ -308,6 +317,9 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBFS() {
     //console.log(this.state.wallweight);
+    this.state.Algo = "BFS";
+    this.clearFiniteWalls();
+
     const { grid } = this.state;
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
@@ -316,6 +328,9 @@ export default class PathfindingVisualizer extends Component {
     this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   visualizeBBFS() {
+    this.clearFiniteWalls();
+    this.state.Algo = "Bi-BFS";
+
     const { grid } = this.state;
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
@@ -326,6 +341,8 @@ export default class PathfindingVisualizer extends Component {
     this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   visualizeBDBFS() {
+    this.clearFiniteWalls();
+    this.state.Algo = "Bi+Diag-BFS";
     const { grid } = this.state;
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
@@ -336,6 +353,8 @@ export default class PathfindingVisualizer extends Component {
     this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   visualizeBFSwithdiagonals() {
+    this.clearFiniteWalls();
+    this.state.Algo = "Diag-BFS";
     const { grid } = this.state;
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
@@ -345,6 +364,8 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeOrthJPS() {
     const { grid } = this.state;
+    this.state.Algo = "Orth-JPS";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     const visitedNodesInOrder = orthJPS(
@@ -360,6 +381,8 @@ export default class PathfindingVisualizer extends Component {
   //shreeya
   visualizeDijkstra() {
     const { grid } = this.state;
+    this.state.Algo = "Dijkstra";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var diagonalallowed = false;
@@ -380,6 +403,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeIntelligentAstar() {
     const { grid } = this.state;
+    this.state.Algo = "I-Astar";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -402,6 +426,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiIntelligentAstar() {
     const { grid } = this.state;
+    this.state.Algo = "Bi-I-Astar";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -427,6 +452,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBestfs() {
     const { grid } = this.state;
+    this.state.Algo = "Bestfs";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = "Diagonal";
@@ -449,6 +475,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeIBestfs() {
     const { grid } = this.state;
+    this.state.Algo = "I-BestFS";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = "Diagonal";
@@ -471,6 +498,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiDijkstra() {
     const { grid } = this.state;
+    this.state.Algo = "Bi-Dijkstra";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var diagonalallowed = false;
@@ -495,6 +523,7 @@ export default class PathfindingVisualizer extends Component {
 
   visualizeBiBestfs() {
     const { grid } = this.state;
+    this.state.Algo = "Bi-Bestfs";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -520,6 +549,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeIDAstar() {
     const { grid } = this.state;
+    this.state.Algo = "IDA-STAR";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -542,6 +572,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeDijkstraDiag() {
     const { grid } = this.state;
+    this.state.Algo = "Diag-Dijkstra";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var diagonalallowed = true;
@@ -562,6 +593,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeIntelligentAstarDiag() {
     const { grid } = this.state;
+    this.state.Algo = "DiagI-Astar-";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -584,6 +616,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiIntelligentAstarDiag() {
     const { grid } = this.state;
+    this.state.Algo = "BiDiag-I-Astar";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -609,6 +642,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBestfsDiag() {
     const { grid } = this.state;
+    this.state.Algo = "Diag-Bestfs";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = "Diagonal";
@@ -631,6 +665,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeIBestfsDiag() {
     const { grid } = this.state;
+    this.state.Algo = "Diag I-Bestfs";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = "Diagonal";
@@ -653,6 +688,7 @@ export default class PathfindingVisualizer extends Component {
   }
   visualizeBiDijkstraDiag() {
     const { grid } = this.state;
+    this.state.Algo = "BiDiag-Dijkstra";
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var diagonalallowed = true;
@@ -677,6 +713,8 @@ export default class PathfindingVisualizer extends Component {
 
   visualizeBiBestfsDiag() {
     const { grid } = this.state;
+    this.state.Algo = "Bi+Diag Bestfs";
+
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -703,6 +741,9 @@ export default class PathfindingVisualizer extends Component {
   visualizeIDAstarDiag() {
     const { grid } = this.state;
     console.log(this.state.heuristicname);
+
+    this.state.Algo = "Diag-IDAstar";
+    console.log(this.state.Algo);
     const startNode = grid[this.state.startnoderow][this.state.startnodecol];
     const finishNode = grid[this.state.finishnoderow][this.state.finishnodecol];
     var heuristic = this.state.heuristicname;
@@ -739,13 +780,13 @@ export default class PathfindingVisualizer extends Component {
     const node1 = grid1[this.state.finishnoderow][this.state.finishnodecol];
     document.getElementById(`node-${node1.row}-${node1.col}`).className =
       "node node-finish";
-    const grid = getInitialGrid(
+    const grid2 = getInitialGrid(
       this.state.startnoderow,
       this.state.startnodecol,
       this.state.finishnoderow,
       this.state.finishnodecol
     );
-    this.setState({ grid });
+    this.setState({ grid: grid2 });
   }
 
   pauseSearch() {
@@ -791,8 +832,37 @@ export default class PathfindingVisualizer extends Component {
       "node node-finish";
   }
 
+  clearFiniteWalls() {
+    const grid1 = this.state.grid;
+    for (let row = 0; row < t_rows; row++) {
+      for (let col = 0; col < t_cols; col++) {
+        const node = grid1[row][col];
+        if (node.isWallweight) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node";
+          node.isWall = false;
+          node.wallweight = 1;
+          node.isWallweight = false;
+          node.distance = Infinity;
+          node.previousNode = null;
+          node.next = null;
+          node.nex = null;
+          node.gscore = Infinity;
+          node.hscore = Infinity;
+          node.fscore = Infinity;
+          node.inclosed = false;
+          node.inopen = false;
+          node.startvisited = false;
+          node.endvisited = false;
+          node.isVisited = false;
+        }
+      }
+    }
+    this.setState({ grid: grid1 });
+  }
+
   render() {
-    const { grid, mouseIsPressed } = this.state;
+    const { grid, mouseIsPressed, wallweight, Algo } = this.state;
 
     return (
       <>
@@ -1265,6 +1335,32 @@ export default class PathfindingVisualizer extends Component {
                 onChange={this.handleOptionChangefinite}
               />
               <label for="radioBanana">Finite Wall</label>
+              <input
+                type="radio"
+                id="walltext"
+                name="radioFruit"
+                value="banana"
+              />
+              <label for="walltext">Wall Weight:</label>
+              <input
+                type="radio"
+                id="wall-value"
+                name="radioFruit"
+                value="banana"
+              />
+              <label for="wall-value">{wallweight}</label>
+            </div>
+          </div>
+          <div className="currentAlgo">
+            Currrent-Algo
+            <div className="running">
+              <input
+                type="radio"
+                id="runningAlgo"
+                name="radioFruit"
+                value="apple"
+              />
+              <label for="runningAlgo">{Algo}</label>
             </div>
           </div>
         </div>
@@ -1305,8 +1401,6 @@ export default class PathfindingVisualizer extends Component {
             </div>
           </div>
         </div>
-
-        <div></div>
 
         <div className="gridradio">
           <div className="radiowrapper">

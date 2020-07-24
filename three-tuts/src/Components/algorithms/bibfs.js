@@ -7,7 +7,7 @@ export function bbfs(grid,startNode,finishNode,diagonalallowed){
   const endqueue = [finishNode];
   while (!!startqueue.length && endqueue.length){
     const closestNode = startqueue.shift();
-    if (closestNode.wallweight === 99999999) continue ;
+    if (closestNode.isWall) continue ;
     if (closestNode.distance === Infinity) return visitedNodesInOrder;
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
@@ -28,19 +28,19 @@ export function bbfs(grid,startNode,finishNode,diagonalallowed){
         var temp3 = [neighbor];
       neighbor.previousNode = closestNode;
         neighbor.startvisited = true;
-        neighbor.distance = closestNode.distance + neighbor.wallweight;
+        neighbor.distance = closestNode.distance + 1;
         startqueue.push(neighbor);
       visitedNodesInOrder.unshift(temp3)
       return visitedNodesInOrder;
       }
         neighbor.previousNode = closestNode;
         neighbor.startvisited = true;
-        neighbor.distance = closestNode.distance + neighbor.wallweight;
+        neighbor.distance = closestNode.distance + 1;
         startqueue.push(neighbor);
     }
 
     const ftNode = endqueue.shift();
-    if (ftNode.wallweight === 99999999) continue ;
+    if (ftNode.isWall) continue ;
     if (ftNode.distance === Infinity) return visitedNodesInOrder;
     ftNode.isVisited = true;
     visitedNodesInOrder.push(ftNode);
@@ -62,88 +62,16 @@ export function bbfs(grid,startNode,finishNode,diagonalallowed){
       visitedNodesInOrder.unshift(temp6)
       neighbora.nex = ftNode;
       neighbora.endvisited = true;
-      neighbora.distance = ftNode.distance + neighbora.wallweight;
+      neighbora.distance = ftNode.distance + 1;
       endqueue.push(neighbora);
       return visitedNodesInOrder;
     }
       neighbora.nex = ftNode;
       neighbora.endvisited = true;
-      neighbora.distance = ftNode.distance + neighbora.wallweight;
+      neighbora.distance = ftNode.distance + 1;
       endqueue.push(neighbora);
     }
   }
-  console.log(1)
-  while (!!startqueue.length){
-    console.log("here2")
-    const closestNode = startqueue.shift();
-    if (closestNode.wallweight === 99999999) continue ;
-    if (closestNode.distance === Infinity) return visitedNodesInOrder;
-    closestNode.isVisited = true;
-    visitedNodesInOrder.push(closestNode);
-    if (closestNode === finishNode) {
-      var temp1 = [closestNode];
-      visitedNodesInOrder.unshift(temp1)
-      return visitedNodesInOrder;
-    }
-    // if (closestNode.endvisited){
-    //   var temp2 = [closestNode];
-    //   visitedNodesInOrder.unshift(temp2)
-    //   return visitedNodesInOrder;
-    // }
-    const unvisitedNeighbors = getUnvisitedNeighbors(closestNode, grid,diagonalallowed);
-    for (const neighbor of unvisitedNeighbors){
-      if (neighbor.startvisited) continue ;
-      // if (neighbor.endvisited){
-      //   var temp3 = [neighbor];
-      // neighbor.previousNode = closestNode;
-      //   neighbor.startvisited = true;
-      //   neighbor.distance = closestNode.distance + neighbor.wallweight;
-      //   startqueue.push(neighbor);
-      // visitedNodesInOrder.unshift(temp3)
-      // return visitedNodesInOrder;
-      // }
-        neighbor.previousNode = closestNode;
-        neighbor.startvisited = true;
-        neighbor.distance = closestNode.distance + neighbor.wallweight;
-        startqueue.push(neighbor);
-    }
-  }
-  while(!!endqueue.length){
-    console.log("here3")
-    const ftNode = endqueue.shift();
-    if (ftNode.wallweight > 99999998) continue ;
-    if (ftNode.distance === Infinity) return visitedNodesInOrder;
-    ftNode.isVisited = true;
-    visitedNodesInOrder.push(ftNode);
-    // if (ftNode === startNode) {
-    //   var temp4 = [ftNode];
-    //   visitedNodesInOrder.unshift(temp4)
-    //   return visitedNodesInOrder;
-    // }
-    if (ftNode.startvisited){
-      var temp5 = [ftNode];
-      visitedNodesInOrder.unshift(temp5)
-      return visitedNodesInOrder;
-    }
-    const unvisitedNeighbor = getUnvisitedNeighbors(ftNode, grid,diagonalallowed);
-    for (const neighbora of unvisitedNeighbor){
-      if (neighbora.endvisited) continue ;
-    //   if (neighbora.startvisited){
-    //   var temp6 = [neighbora];
-    //   visitedNodesInOrder.unshift(temp6)
-    //   neighbora.nex = ftNode;
-    //   neighbora.endvisited = true;
-    //   neighbora.distance = ftNode.distance + neighbora.wallweight;
-    //   endqueue.push(neighbora);
-    //   return visitedNodesInOrder;
-    // }
-      neighbora.nex = ftNode;
-      neighbora.endvisited = true;
-      neighbora.distance = ftNode.distance + neighbora.wallweight;
-      endqueue.push(neighbora);
-    }
-  }
-  console.log("here1")
   var temp = [finishNode]
   visitedNodesInOrder.unshift(temp)
   return visitedNodesInOrder 

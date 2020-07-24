@@ -2,11 +2,12 @@
 // in which they were visited. Also makes nodes point back to their
 // previous node, effectively allowing us to compute the shortest path
 // by backtracking from the finish node.
+//Implementation of Bi-directional search in Dijkstra algorithm
 import _ from "lodash" ;
 export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
-    const visitedNodesInOrder = [];
-    const TempEnd=[];
-    const TempStart=[];
+    const visitedNodesInOrder = []; //maintains the nodes to be visualised
+    const TempEnd=[]; //maintains the list from end node till interscetion node
+    const TempStart=[];//maintains the list from start node till intersection node
     const tempstart = _.cloneDeep(startNode);
     tempstart.distance=0;
     const tempend = _.cloneDeep(finishNode);
@@ -14,6 +15,7 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
     TempStart.push(tempstart);
     TempEnd.push(tempend);
     while (TempStart.length>0 && TempEnd.length>0){
+      //putting the smallest node from TempStart in visitedNodesinOrder
         sortNodesByDistance(TempStart);
       const closestNode = TempStart.shift();
       if (closestNode.isWall && closestNode.wallweight==999999) continue ;
@@ -22,28 +24,25 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
       const unvisitedNeighbors = getUnvisitedNeighbors(closestNode, grid,diagonalallowed);
       for (const neighbor of unvisitedNeighbors){
         if (neighbor.startvisited) continue ;
-        // console.log("Neighbor updating");  
-        // closestNode.next=neighbor;
         neighbor.previousNode = closestNode;
           neighbor.startvisited = true;
           neighbor.distance = closestNode.distance + closestNode.wallweight;
           TempStart.push(neighbor);
       }
       visitedNodesInOrder.push(closestNode);
+      //if we reach the finish node from start side
       if (closestNode === finishNode) {
-          console.log("Hello");
         var temp1 = [closestNode];
         visitedNodesInOrder.unshift(temp1)
         return visitedNodesInOrder;
       }
+      //if we reach the intersecting nodes
       if (closestNode.endvisited){
-          // console.log("Hi");
         var temp2 = [closestNode];
         visitedNodesInOrder.unshift(temp2)
         return visitedNodesInOrder;
       }
-      
-      // console.log("Entering another field");
+      //after putting the shortest distance node from Tempstart then we will put a node from TempEnd in visitedNodesInOrder
       sortNodesByDistance(TempEnd);
       const closestNodeEnd = TempEnd.shift();
       if (closestNodeEnd.isWall && closestNodeEnd.wallweight==999999) continue ;
@@ -60,14 +59,16 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
           // console.log("Neighbor updation");
       }
       visitedNodesInOrder.push(closestNodeEnd);
+      //if we reach the startnode from end side
       if (closestNodeEnd === startNode) {
-          console.log("Reached End");
+          //console.log("Reached End");
         var temp1 = [closestNodeEnd];
         visitedNodesInOrder.unshift(temp1)
         return visitedNodesInOrder;
       }
+      //if we find the intersecting nodes
       if (closestNodeEnd.startvisited){
-          console.log("Hurrayyyy!!!");
+          //console.log("Hurrayyyy!!!");
         var temp2 = [closestNodeEnd];
         visitedNodesInOrder.unshift(temp2)
         return visitedNodesInOrder;
@@ -75,6 +76,7 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
       
       
     }
+    //if nodes in TempStart are left to be visualised
     while ( TempStart.length>0){
         // console.log("Start side left");
         sortNodesByDistance(TempStart);
@@ -104,6 +106,7 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
 
       
     }
+    //if nodes in tempend are left to be visualised
     while (TempEnd.length>0){
         // console.log("End side left");
       sortNodesByDistance(TempEnd);
@@ -133,11 +136,12 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
       
     }
   }
+  //sorts the node by distance parameter
   function sortNodesByDistance(unvisitedNodes) {
     unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
   }
   
-  
+  //Get all neighbors
   function getUnvisitedNeighbors(node, grid,diagonalallowed) {
     const neighbors = [];
     const {col, row} = node;
@@ -157,7 +161,7 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
   
   
   // Backtracks from the finishNode to find the shortest path.
-  // Only works when called after the dijkstra method above.
+  // Only works when called after the bi-dijkstra method above.
   export function getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
@@ -167,13 +171,14 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
     }
     return nodesInShortestPathOrder;
   }
+  //This function finds the shortest path in bi-directional search.It starts visualisaing the shortest path from both start node and end node side and at the end visualises the intersecting node.
   export function bidfsans(node) {
-
+    //Here node is the intersecting node which is the only node having both previousNode and next
     // return [node];
-    console.log(node);
+    //console.log(node);
     var ans = [];
-    let s = node;  
-    let e = node;
+    let s = node;   //To traverse the start side
+    let e = node;   //To traverse the end side
     // console.log(s);
     // console.log(e);
     while (s.previousNode !== null && e.next!== null){
@@ -182,11 +187,13 @@ export function bidijkstra(grid,startNode,finishNode,diagonalallowed){
       s = s.previousNode;
       e = e.next ;
     }
+    //if the nodes from start side are left
     while (s.previousNode !== null){
         // console.log("Wohooo");
       ans.unshift(s.previousNode);
       s = s.previousNode;
     }
+    //if nodes from end side are left
     while (e.next !== null){
       ans.unshift(e.next);
       e = e.next ;
